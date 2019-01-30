@@ -5,17 +5,14 @@ var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 var request = require("request");
-var liriReturn = process.argv[2];
-var movieName = process.argv[3];
+var command = process.argv[2];
 var moment = require("moment");
 var inquirer = require("inquirer");
 var axios = require("axios");
 var bandsintown = require("bandsintown");
-// var liriReturn = process.argv[2];
-// var movieName = process.argv[3];
 
 
-switch(liriReturn){
+switch(command){
     case "concert-this":
         concertThis();
         break;
@@ -41,7 +38,7 @@ switch(liriReturn){
 
 //SPOTIFY search function....
 function spotifyThisSong(trackName){
-    var trackName = process.argv[3];
+    var trackName = process.argv.slice(3).join(" ");;
     if(!trackName){
         trackName = "The Sign";
     };
@@ -77,7 +74,7 @@ function spotifyThisSong(trackName){
 
 //MOVIE search function....
 function movieThis(){
-    
+    var movieName = process.argv.slice(3).join(" ");
     var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
     request (queryURL, function(error, response, body){
@@ -107,7 +104,7 @@ function movieThis(){
 
 //Concert this function....
 function concertThis(artist){
-    var artist = process.argv[3];
+    var artist = process.argv.slice(3).join(" ");
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     
     axios.get(queryUrl).then(
@@ -123,11 +120,15 @@ function concertThis(artist){
             console.log("\n----------------------------------------");
             
             
+            
         }
         
     );
 
 };
+
+//Do-what-it-says function..... 
+
 
 
 
