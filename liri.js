@@ -42,10 +42,10 @@ function spotifyThisSong(trackName){
     if(!trackName){
         trackName = "The Sign";
     };
-    songRequest = trackName;
+    song = trackName;
     spotify.search({
         type: "track",
-        query: songRequest
+        query: song
     },
         function(err, data){
             if(!err){
@@ -128,45 +128,16 @@ function concertThis(artist){
 };
 
 //Do-what-it-says function..... 
+var fs = require("fs");
 
+function doWhatItSays(){
+fs.readFile("./random.txt", "utf-8", function (err, data){
+    if(err) throw err;
+    var command = process.argv.slice(2).join(",")
+    console.log(data);
+    console.log(command);
 
+    
+})
 
-
-// var spotify = new Spotify(keys.spotify);
-
-// inquirer.prompt([
-//     {
-//         type: "list",
-//         name: "search-type",
-//         message: "What type of search?",
-//         choices: ["movie-this", "concert-this", "spotify-this-song", "do-what-it-says"]
-//     },{
-//         type: "input",
-//         name: "search",
-//         message: "Search: "
-//     }
-// ]).then(function(user){
-//     var spotify = new Spotify({
-//     id: process.env.SPOTIFY_ID,
-//     secret: process.env.SPOTIFY_SECRET,
-//     });
-        
-//     if(user.search === "spotify-this-song"){
-        
-//         spotify.search ({
-//             type:'track', query:'user.search' || "The Sign", limit :1 }, function(err, data){
-//                 if(err){
-//                     return console.log("Error: " + "\n" + err);
-//                 }else{
-//             console.log("\n===================");
-//             console.log("\nArtists: " + data.tracks.items[0].album.artists[0].name);
-//             console.log("\nSong: " + data.tracks.items[0].name);
-//             }
-//     });
-//             }
-        
-        // })
-
-
-
-
+}
