@@ -7,9 +7,7 @@ var spotify = new Spotify(keys.spotify);
 var request = require("request");
 var command = process.argv[2];
 var moment = require("moment");
-var inquirer = require("inquirer");
 var axios = require("axios");
-var bandsintown = require("bandsintown");
 
 
 switch(command){
@@ -110,6 +108,7 @@ function concertThis(artist){
     axios.get(queryUrl).then(
         function (response) {
             var answer = response.data;
+            
             
             console.log("\n----------------------------------------");
             var date = moment(answer[0].datetime).format("MM/DD/YYYY");
